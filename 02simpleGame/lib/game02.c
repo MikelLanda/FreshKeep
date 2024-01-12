@@ -108,4 +108,4 @@ int pantailaHasi()
             Superficie = SDL_GetWindowSurface(Ventana);
 
             // Se actualiza la superficie
-            SDL_UpdateWindowSurface(Ventana);*/
+            SDL_UpdateWindowSurface(Ventanaa);*/
