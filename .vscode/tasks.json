@@ -1,0 +1,103 @@
+{
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "cmd.exe",
+                "args": [
+                    "/C",
+                    "\"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/Tools/VsDevCmd.bat\"",
+                    "&&"
+                ]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C: build active dir (windows, MSVC)",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/W3",
+                "/EHsc",
+                "/nologo",
+                "/I.",
+                "/I${workspaceFolder}\\simpleSdlWrapper",
+                "/I${workspaceFolder}\\sdl2\\include",
+                "/I${workspaceFolder}\\sdl2image\\include",
+                "/I${workspaceFolder}\\sdl2mixer\\include",
+                "/I${workspaceFolder}\\sdl2ttf\\include",
+                "/Fe:${workspaceFolder}\\Debug\\${fileDirnameBasename}.exe",
+                "/Fo:Debug\\",
+                "/Fd:Debug\\",
+                "${workspaceFolder}\\simpleSdlWrapper\\*.c",
+                "lib\\*.c",
+                "*.c",
+                "/link",
+                "/SUBSYSTEM:WINDOWS",
+                "/DEBUG",
+                "/INCREMENTAL",
+                "/ILK:Debug\\${fileDirnameBasename}.ilk",
+                "/LIBPATH:${workspaceFolder}\\sdl2\\libs",
+                "/LIBPATH:${workspaceFolder}\\sdl2image\\libs",
+                "/LIBPATH:${workspaceFolder}\\sdl2mixer\\libs",
+                "/LIBPATH:${workspaceFolder}\\sdl2ttf\\libs",
+                "SDL2.lib",
+                "SDL2main.lib",
+                "SDL2_image.lib",
+                "SDL2_ttf.lib",
+                "SDL2_mixer.lib",
+                "Shell32.lib"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": {
+                "base": "$msCompile",
+                "fileLocation": [
+                    "relative",
+                    "${fileDirname}"
+                ]
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "cppbuild",
+            "label": "C: build active dir (linux, GCC)",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-Wall",
+                "-g",
+                "${workspaceFolder}/simpleSdlWrapper/*.c",
+                "lib/*.c",
+                "*.c",
+                "-I${workspaceFolder}/simpleSdlWrapper",
+                "-I.",
+                "-I/usr/include/SDL2",
+                "-D_REENTRANT",
+                "-lm",
+                "-lSDL2",
+                "-lSDL2_mixer",
+                "-lSDL2_image",
+                "-lSDL2_ttf",
+                "-o",
+                "${workspaceFolder}/Debug/${fileDirnameBasename}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": [
+                    "relative",
+                    "${fileDirname}"
+                ]
+            },
+            "group": "build"
+        }
+    ],
+    "version": "2.0.0"
+}
