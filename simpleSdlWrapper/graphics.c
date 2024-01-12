@@ -80,7 +80,7 @@ void zirkuluaMarraztu(int x, int y, int r)
     }
 }
 
-int irudiaMarraztu(SDL_Renderer *renderer, SDL_Texture *texture, SDL_Rect *pDest, const SDL_Rect *dstrect)
+int irudiaMarraztu(SDL_Texture *texture, SDL_Rect *pDest)
 {
     SDL_Rect src;
 

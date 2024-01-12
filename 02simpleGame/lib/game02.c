@@ -1,5 +1,3 @@
-#include "graphics.h"
-#include "imagen.h"
 #include "text.h"
 #include <SDL.h>
 #include <SDL_ttf.h>

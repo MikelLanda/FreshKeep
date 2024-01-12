@@ -2,6 +2,7 @@
     "editor.formatOnSave": true,
     "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Microsoft, InsertBraces: true}",
     "files.associations": {
-        "game02.h": "c"
+        "game02.h": "c",
+        "sdl.h": "c"
     }
 }
