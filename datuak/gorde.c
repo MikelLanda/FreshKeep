@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+#define _CRT_SECURE_NO_WARNINGS
 
 void idatziFitxategian(char izena[], char testua[]);
 int irakurri(char izena[], char produktuak[100][15], char datak[100][3][5]);

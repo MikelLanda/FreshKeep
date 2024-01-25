@@ -44,7 +44,7 @@
 #include <stdio.h>
 
 int pantailaHasi();
-int Irudiakjarri(int zeregin);
+int Irudiakjarri(int zeregin, int pantailarentamaina);
 void refrescarpagina(int zeregin, int zerjarri);
 void idatziFitxategian(char izena[], char testua[]);
 
