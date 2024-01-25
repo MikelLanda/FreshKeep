@@ -20,8 +20,9 @@ void laukiaMarraztu(SDL_Renderer *gRenderer, int x, int y, int pw, int ph, SDL_C
 
 int irudiaMarraztu(SDL_Texture *texture, SDL_Rect *pDest);
 void aldatuatala(SDL_Renderer *gRenderer, SDL_Color NorGaraKolorea, TTF_Font *font, int screenWidth, int zerjarri,
-                 SDL_Window *Ventana, Input inputak[], int zenbatInput, char produktuak[100][15],
-                 char datak[100][3][5]);
+                 SDL_Window *Ventana, Input inputak[], int zenbatInput, char produktuak[100][15], char datak[100][3][5],
+                 int screenHeight, SDL_Color laukizuzenarenKolorea, int menuairekita, int soinuapiztutadago,
+                 int animazioaeginda);
 
 SDL_Renderer *getRenderer(void);
 

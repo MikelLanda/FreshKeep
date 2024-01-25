@@ -63,7 +63,7 @@ void idatzi(SDL_Renderer *gRenderer, int x, int y, char *testua, SDL_Color kolor
     SDL_RenderPresent(gRenderer);
 }
 
-void tituluaIdatzi(char *str, SDL_Color textColor, SDL_Window *Ventana, char *fuente)
+void tituluaIdatzi(char *str, SDL_Color textColor, SDL_Window *Ventana, char *fuente, int altuera)
 {
     textuaGaitu(fuente, 70);
     SDL_Surface *textSurface;
@@ -87,7 +87,7 @@ void tituluaIdatzi(char *str, SDL_Color textColor, SDL_Window *Ventana, char *fu
     src.x = 0;
     dst.x = (wWindow - w) / 2;
     src.y = 0;
-    dst.y = 30;
+    dst.y = altuera;
     src.w = dst.w = textSurface->w;
     src.h = dst.h = textSurface->h;
     SDL_RenderCopy(gRenderer, mTexture, &src, &dst);

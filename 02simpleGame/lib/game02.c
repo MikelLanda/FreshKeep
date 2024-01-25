@@ -32,6 +32,12 @@
 #define PERFILNEREA "./img/Perfil_Nerea.bmp"
 #define TESTUAHORIZONTAL "./img/TESTUA_NORGARA_HORIZONTALA.bmp"
 #define TESTUABERTIKAL "./img/TESTUA_NORGARA_BERTIKALA.bmp"
+#define JOKOA_SOUND "./sound/Audio fondo.mp3"
+#define HOSTOA_SOUND "./sound/hostoa_sound.mp3"
+#define GORDE_SOUND "./sound/gorde_sound.mp3"
+// #define PASATU_ORRIA_SOUND "./sound/pasatuOrria_sound.mp3"
+#define BOTOIAK_SOUND "./sound/botoiak_sound.mp3"
+#define SOINUA_SOUND "./sound/soinua_sound.mp3"
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -75,6 +81,12 @@ int nuevoscreenWidth;
 int nuevoscreenHeigth;
 int zerjarri = 0;
 int botoiabehinklikatu = 0;
+int animazioaeginda = 0;
+int HostoaSound = -2;
+int BotoiakSound = -2;
+int GordeSound = -2;
+// int PasatuOrriaSound;
+int SoinuaSound = -2;
 
 char produktuak[100][15];
 char datak[100][3][5];
@@ -95,6 +107,9 @@ int pantailaHasi()
         SDL_SetWindowFullscreen(Ventana, SDL_WINDOW_FULLSCREEN_DESKTOP);
     }
     gRenderer = SDL_CreateRenderer(Ventana, -1, SDL_RENDERER_ACCELERATED);
+    aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput, produktuak,
+                datak, screenHeight, laukizuzenarenKolorea, menuairekita, soinuapiztutadago, animazioaeginda);
+    animazioaeginda = 1;
     SDL_GetWindowSize(Ventana, &screenWidth, &screenHeight);
     SDL_SetWindowSize(Ventana, screenWidth, screenHeight);
     SDL_SetRenderDrawColor(gRenderer, 225, 255, 198, SDL_ALPHA_OPAQUE);
@@ -162,6 +177,11 @@ int pantailaHasi()
                 int submit = handleSubmitButton(&ebentua);
                 if (submit && inputAktiboa != NULL)
                 {
+                    if (GordeSound == -2)
+                    {
+                        GordeSound = loadSound(GORDE_SOUND);
+                    }
+                    playSound(GordeSound);
                     SDL_Log("Enter");
                     int strlen = 0;
                     char datua[50] = "";
@@ -198,8 +218,11 @@ int pantailaHasi()
                     }
                     SDL_SetWindowSize(Ventana, screenWidth, screenHeight);
                     Soinua_Botoia.rect.x = screenWidth - 61;
-                    refrescarpagina(0, zerjarri);
-                    inputakMarraztu(gRenderer, inputak, zenbatInput);
+                    if (!lehenengoaldia)
+                    {
+                        refrescarpagina(0, zerjarri);
+                        inputakMarraztu(gRenderer, inputak, zenbatInput);
+                    }
                 }
                 break;
 
@@ -213,6 +236,11 @@ int pantailaHasi()
         }
         if (Hostoa_Botoia.isClicked)
         {
+            if (HostoaSound == -2)
+            {
+                HostoaSound = loadSound(HOSTOA_SOUND);
+            }
+            playSound(HostoaSound);
             if (!menuairekita)
             {
                 // Lógica cuando el botón es clicado por primera vez
@@ -238,6 +266,11 @@ int pantailaHasi()
 
         if (Soinua_Botoia.isClicked)
         {
+            if (SoinuaSound == -2)
+            {
+                SoinuaSound = loadSound(SOINUA_SOUND);
+            }
+            playSound(SoinuaSound);
             if (soinuapiztutadago)
             {
 
@@ -259,19 +292,23 @@ int pantailaHasi()
         }
         if (Hasiera_Botoia.isClicked)
         {
+            if (BotoiakSound == -2)
+            {
+                BotoiakSound = loadSound(BOTOIAK_SOUND);
+            }
             zerjarri = 0;
             refrescarpagina(0, zerjarri);
-            aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput,
-                        produktuak, datak);
             SDL_RenderPresent(gRenderer);
             Hasiera_Botoia.isClicked = 0;
         }
         if (ListaOsoa_Botoia.isClicked)
         {
+            if (BotoiakSound == -2)
+            {
+                BotoiakSound = loadSound(BOTOIAK_SOUND);
+            }
             zerjarri = 1;
             refrescarpagina(0, zerjarri);
-            aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput,
-                        produktuak, datak);
             SDL_RenderPresent(gRenderer);
             ListaOsoa_Botoia.isClicked = 0;
         }
@@ -391,12 +428,12 @@ void refrescarpagina(int zeregin, int zerjarri)
     SDL_Rect background = {0, 0, screenWidth, screenHeight};
     SDL_RenderFillRect(gRenderer, &background);
     aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput, produktuak,
-                datak);
+                datak, screenHeight, laukizuzenarenKolorea, menuairekita, soinuapiztutadago, animazioaeginda);
     SDL_RenderDrawLine(gRenderer, 20, 20, 70, 70);
     SDL_RenderPresent(gRenderer);
 
     SDL_Color kolor = {0x00, 0x00, 0x00};
-    tituluaIdatzi("FRESHKEEP", kolor, Ventana, "(Titulo)ChauPhilomeneOne-Regular.ttf");
+    tituluaIdatzi("FRESHKEEP", kolor, Ventana, "(Titulo)ChauPhilomeneOne-Regular.ttf", 30);
     Irudiakjarri(zeregin, screenWidth);
     if (menuairekita)
     {

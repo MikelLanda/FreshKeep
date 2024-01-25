@@ -1,5 +1,6 @@
 // Esto con un incude de include
 #include "input.h"
+#include "text.h"
 #include "zerrenda.h"
 #include <math.h>
 #include <stdio.h>
@@ -141,10 +142,18 @@ void zerrendaLaukiaMarraztu(SDL_Renderer *gRenderer, int x, int y, int pw, int p
 }
 
 void aldatuatala(SDL_Renderer *gRenderer, SDL_Color NorGaraKolorea, TTF_Font *font, int screenWidth, int zerjarri,
-                 SDL_Window *Ventana, Input inputak[], int zenbatInput, char produktuak[100][15], char datak[100][3][5])
+                 SDL_Window *Ventana, Input inputak[], int zenbatInput, char produktuak[100][15], char datak[100][3][5],
+                 int screenHeight, SDL_Color laukizuzenarenKolorea, int menuairekita, int soinuapiztutadago,
+                 int animazioaeginda)
 {
     if (zerjarri == 0)
     {
+        int norabidea = 0;
+        int x = 200;
+        int w = 10;
+        int h = 100;
+
+        SDL_Color kolor = {0x00, 0x00, 0x00};
         irudiaMugitu(4, -2000, 200);
         irudiaMugitu(5, -2000, 200);
         irudiaMugitu(6, -2000, 200);
@@ -154,6 +163,46 @@ void aldatuatala(SDL_Renderer *gRenderer, SDL_Color NorGaraKolorea, TTF_Font *fo
 
         inputak[0].inputBox.x = -2000;
         inputak[1].inputBox.x = -2000;
+        if (!animazioaeginda)
+        {
+
+            do
+            {
+                SDL_RenderPresent(gRenderer);
+                w += 10;
+                SDL_GetWindowSize(Ventana, &screenWidth, &screenHeight);
+                SDL_SetWindowSize(Ventana, screenWidth, screenHeight);
+                SDL_SetRenderDrawColor(gRenderer, 225, 255, 198, SDL_ALPHA_OPAQUE);
+                SDL_Rect background = {0, 0, screenWidth, screenHeight};
+                SDL_RenderFillRect(gRenderer, &background);
+                SDL_RenderDrawLine(gRenderer, 20, 20, 70, 70);
+                laukiaMarraztu(gRenderer, (screenWidth / 2) - (w / 2), (screenHeight / 2) - (h / 2), w, h,
+                               NorGaraKolorea, font, "");
+                tituluaIdatzi("FRESHKEEP", kolor, Ventana, "(Titulo)ChauPhilomeneOne-Regular.ttf", 30);
+                Irudiakjarri(0, screenWidth);
+                if (menuairekita)
+                {
+                    laukiaMarraztu(gRenderer, 10, 100, 160, 50, laukizuzenarenKolorea, font, "Hasiera");
+                    laukiaMarraztu(gRenderer, 10, 180, 160, 50, laukizuzenarenKolorea, font, "Lista osoa");
+                    laukiaMarraztu(gRenderer, 10, 260, 160, 50, laukizuzenarenKolorea, font, "Gehitu");
+                    laukiaMarraztu(gRenderer, 10, 340, 160, 50, laukizuzenarenKolorea, font, "Nor gara");
+                    SDL_RenderPresent(gRenderer);
+                }
+
+                SDL_Delay(16);
+            } while (w < 500);
+            laukiaMarraztu(gRenderer, (screenWidth / 2) - 250, (screenHeight / 2) - 50, 500, 100, NorGaraKolorea, font,
+                           "");
+            tituluaIdatzi("ONGI ETORRI!", kolor, Ventana, "(Titulo)ChauPhilomeneOne-Regular.ttf",
+                          (screenHeight / 2) - (h / 2));
+        }
+        else if (animazioaeginda)
+        {
+            laukiaMarraztu(gRenderer, (screenWidth / 2) - 250, (screenHeight / 2) - 50, 500, 100, NorGaraKolorea, font,
+                           "");
+            tituluaIdatzi("ONGI ETORRI!", kolor, Ventana, "(Titulo)ChauPhilomeneOne-Regular.ttf",
+                          (screenHeight / 2) - (h / 2));
+        }
     }
     else if (zerjarri == 1)
     {
