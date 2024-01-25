@@ -9,6 +9,7 @@
 
 #include <SDL.h>
 #include <stdio.h>
+int pantailaHasi();
 int Irudiakjarri(int zeregin, int pantailarentamaina);
 int SDL_main(int argc, char *str[])
 {
