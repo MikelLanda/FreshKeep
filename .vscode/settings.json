@@ -8,6 +8,9 @@
     "text.h": "c",
     "ebentoak.h": "c",
     "gorde.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "zerrenda.h": "c",
+    "input.h": "c",
+    "time.h": "c"
   }
 }

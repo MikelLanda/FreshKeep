@@ -8,6 +8,7 @@
 #include "input.h"
 #include "soinua.h"
 #include "text.h"
+#include "zerrenda.h"
 #include <input.h>
 #include <stdio.h>
 
@@ -260,7 +261,8 @@ int pantailaHasi()
         {
             zerjarri = 0;
             refrescarpagina(0, zerjarri);
-            aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput);
+            aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput,
+                        produktuak, datak);
             SDL_RenderPresent(gRenderer);
             Hasiera_Botoia.isClicked = 0;
         }
@@ -268,7 +270,8 @@ int pantailaHasi()
         {
             zerjarri = 1;
             refrescarpagina(0, zerjarri);
-            aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput);
+            aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput,
+                        produktuak, datak);
             SDL_RenderPresent(gRenderer);
             ListaOsoa_Botoia.isClicked = 0;
         }
@@ -387,7 +390,8 @@ void refrescarpagina(int zeregin, int zerjarri)
     SDL_SetRenderDrawColor(gRenderer, 225, 255, 198, SDL_ALPHA_OPAQUE);
     SDL_Rect background = {0, 0, screenWidth, screenHeight};
     SDL_RenderFillRect(gRenderer, &background);
-    aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput);
+    aldatuatala(gRenderer, NorGaraKolorea, font, screenWidth, zerjarri, Ventana, inputak, zenbatInput, produktuak,
+                datak);
     SDL_RenderDrawLine(gRenderer, 20, 20, 70, 70);
     SDL_RenderPresent(gRenderer);
 

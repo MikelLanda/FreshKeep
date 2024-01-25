@@ -46,6 +46,7 @@ int irakurri(char izena[], char produktuak[100][15], char datak[100][3][5])
         }
     }
     fclose(fitxategia);
+    datakOrdenatu(datak, produktuak, i);
     return i;
 }
 

@@ -1,5 +1,6 @@
 // Esto con un incude de include
 #include "input.h"
+#include "zerrenda.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -127,8 +128,20 @@ void laukiaMarraztu(SDL_Renderer *gRenderer, int x, int y, int pw, int ph, SDL_C
     SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 255);
     SDL_RenderDrawRect(gRenderer, &laukia);
 }
+
+void zerrendaLaukiaMarraztu(SDL_Renderer *gRenderer, int x, int y, int pw, int ph, SDL_Color color,
+                            char produktuak[100][15], char datak[100][3][5])
+{
+    SDL_Rect laukia = {x, y, pw, ph};
+    SDL_SetRenderDrawColor(gRenderer, color.r, color.g, color.b, color.a);
+    SDL_RenderFillRect(gRenderer, &laukia);
+    SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 255);
+    SDL_RenderDrawRect(gRenderer, &laukia);
+    pantailaratuZerrenda(produktuak, datak, gRenderer, laukia);
+}
+
 void aldatuatala(SDL_Renderer *gRenderer, SDL_Color NorGaraKolorea, TTF_Font *font, int screenWidth, int zerjarri,
-                 SDL_Window *Ventana, Input inputak[], int zenbatInput)
+                 SDL_Window *Ventana, Input inputak[], int zenbatInput, char produktuak[100][15], char datak[100][3][5])
 {
     if (zerjarri == 0)
     {
@@ -152,6 +165,7 @@ void aldatuatala(SDL_Renderer *gRenderer, SDL_Color NorGaraKolorea, TTF_Font *fo
         irudiaMugitu(9, -2000, 200);
 
         laukiaMarraztu(gRenderer, 250, 200, (screenWidth - 500), 500, NorGaraKolorea, font, "");
+        zerrendaLaukiaMarraztu(gRenderer, 250, 200, (screenWidth - 500), 500, NorGaraKolorea, produktuak, datak);
 
         inputak[0].inputBox.x = -2000;
         inputak[1].inputBox.x = -2000;
