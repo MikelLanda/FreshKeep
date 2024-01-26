@@ -7,12 +7,12 @@
 void eguneratuData(char data[3][5]);
 void pantailaratuZerrenda(char produktuak[100][15], char datak[100][3][5], SDL_Renderer *gRenderer, SDL_Rect laukia)
 {
-    int x = 400, y = laukia.y + 40, i = 0, zenbat = 0, diferentzia = 0;
+    int x = 400, y = laukia.y + 40, i = 0, zenbat = 0, diferentzia = 0, pantailaratuak = 0;
     SDL_Color kolorea = {0x00, 0x00, 0x00};
     zenbat = irakurri("fitxategia.txt", produktuak, datak);
     int gaurkoData[3] = {0, 0, 0};
     eguneratuData(gaurkoData);
-    while (i < zenbat)
+    while (i < zenbat && pantailaratuak < 9)
     {
         char data[20];
 
@@ -22,6 +22,7 @@ void pantailaratuZerrenda(char produktuak[100][15], char datak[100][3][5], SDL_R
             idatzi(gRenderer, laukia.x + 40, y, produktuak[i], kolorea, 30, "OpenSans-Regular.ttf");
             idatzi(gRenderer, laukia.x + laukia.w - 180, y, data, kolorea, 30, "OpenSans-Regular.ttf");
             y += 50;
+            pantailaratuak++;
         }
         i++;
     }
