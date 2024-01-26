@@ -9,6 +9,8 @@ void datuakBihurtu(char str[], char izena[50], char data[3][5]);
 int datakKonparatu(char data1[3][5], char data2[3][5]);
 void datakOrdenatu(char datak[100][3][5], char produktuak[100][15], int zenbat);
 void trukatuProduktuak(char produktu1[15], char data1[3][5], char produktu2[15], char data2[3][5]);
+int konprobatuProduktuaFormatua(char produktua[20]);
+int konprobatuDataFormatua(char data[20]);
 
 void idatziFitxategian(char izena[], char testua[])
 {
@@ -94,13 +96,10 @@ void datuakBihurtu(char str[], char izena[50], char data[3][5])
     urtea[4] = '\0';
     hilabetea[2] = '\0';
     eguna[2] = '\0';
-    SDL_Log("Produktua: %s", produktua);
-    SDL_Log("Urtea: %s", urtea);
     SDL_strlcpy(izena, produktua, 10);
     SDL_strlcpy(data[0], urtea, 10);
     SDL_strlcpy(data[1], hilabetea, 10);
     SDL_strlcpy(data[2], eguna, 10);
-    //{produktua, {urtea, hila, egun}}
 }
 
 int datakKonparatu(char data1[3][5], char data2[3][5])
@@ -160,4 +159,60 @@ void trukatuProduktuak(char produktu1[15], char data1[3][5], char produktu2[15],
     SDL_strlcpy(data2[0], tmpData[0], 5);
     SDL_strlcpy(data2[1], tmpData[1], 5);
     SDL_strlcpy(data2[2], tmpData[2], 5);
+}
+
+int konprobatuProduktuaFormatua(char produktua[20])
+{
+    int i = 0;
+    while (produktua[i] != '\0' && produktua[i] != '\\')
+    {
+        i++;
+    }
+    return produktua[i] == '\0';
+}
+
+int konprobatuDataFormatua(char data[20])
+{
+    int i = 0, zuzena = 1;
+    while (i < 4 && zuzena)
+    {
+        if (data[i] < '0' && data[i] > '9')
+        {
+            zuzena = 0;
+        }
+        i++;
+    }
+    if (data[4] != '/')
+    {
+        zuzena = 0;
+    }
+    i++;
+    while (i < 7 && zuzena)
+    {
+        if (data[i] < '0' && data[i] > '9')
+        {
+            zuzena = 0;
+        }
+        i++;
+    }
+    if (data[7] != '/')
+    {
+        zuzena = 0;
+    }
+    i++;
+    while (i < 10 && zuzena)
+    {
+        if (data[i] < '0' && data[i] > '9')
+        {
+            zuzena = 0;
+        }
+        i++;
+    }
+    if (data[10] != '\0')
+    {
+        zuzena = 0;
+    }
+    i++;
+
+    return zuzena;
 }

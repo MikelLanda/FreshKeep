@@ -92,6 +92,8 @@ char produktuak[100][15];
 char datak[100][3][5];
 int zenbatProduktu;
 
+int dataOndo = 1, produktuaOndo = 1;
+
 int pantailaHasi()
 {
 
@@ -177,23 +179,24 @@ int pantailaHasi()
                 int submit = handleSubmitButton(&ebentua);
                 if (submit && inputAktiboa != NULL)
                 {
-                    if (GordeSound == -2)
-                    {
-                        GordeSound = loadSound(GORDE_SOUND);
-                    }
-                    playSound(GordeSound);
-                    SDL_Log("Enter");
                     int strlen = 0;
                     char datua[50] = "";
                     SDL_strlcpy(datua, inputak[0].inputText, 50);
                     strlen = SDL_strlcat(datua, ", ", 50);
                     strlen = SDL_strlcat(datua, inputak[1].inputText, 50);
                     strlen = SDL_strlcat(datua, "\n", 50);
-                    SDL_Log("%s", datua);
-                    idatziFitxategian("fitxategia.txt", datua);
-                    zenbatProduktu = irakurri("fitxategia.txt", produktuak, datak);
-                    datakOrdenatu(datak, produktuak, zenbatProduktu);
-                    inputakGarbitu(inputak, zenbatInput, gRenderer);
+                    dataOndo = konprobatuDataFormatua(inputak[1].inputText);
+                    produktuaOndo = konprobatuProduktuaFormatua(inputak[0].inputText);
+                    if (produktuaOndo && dataOndo)
+                    {
+                        idatziFitxategian("fitxategia.txt", datua);
+                        inputakGarbitu(inputak, zenbatInput, gRenderer);
+                        if (GordeSound == -2)
+                        {
+                            GordeSound = loadSound(GORDE_SOUND);
+                        }
+                        playSound(GordeSound);
+                    }
                 }
                 break;
 
@@ -296,6 +299,7 @@ int pantailaHasi()
             {
                 BotoiakSound = loadSound(BOTOIAK_SOUND);
             }
+            playSound(BotoiakSound);
             zerjarri = 0;
             refrescarpagina(0, zerjarri);
             SDL_RenderPresent(gRenderer);
@@ -307,6 +311,7 @@ int pantailaHasi()
             {
                 BotoiakSound = loadSound(BOTOIAK_SOUND);
             }
+            playSound(BotoiakSound);
             zerjarri = 1;
             refrescarpagina(0, zerjarri);
             SDL_RenderPresent(gRenderer);
@@ -314,12 +319,22 @@ int pantailaHasi()
         }
         if (Gehitu_Botoia.isClicked)
         {
+            if (BotoiakSound == -2)
+            {
+                BotoiakSound = loadSound(BOTOIAK_SOUND);
+            }
+            playSound(BotoiakSound);
             zerjarri = 2;
             refrescarpagina(0, zerjarri);
             Gehitu_Botoia.isClicked = 0;
         }
         if (NorGara_Botoia.isClicked)
         {
+            if (BotoiakSound == -2)
+            {
+                BotoiakSound = loadSound(BOTOIAK_SOUND);
+            }
+            playSound(BotoiakSound);
             zerjarri = 3;
             refrescarpagina(0, zerjarri);
             NorGara_Botoia.isClicked = 0;
